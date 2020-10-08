@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"fmt"
 	"log"
 	"os/exec"
 	"time"
@@ -50,7 +51,7 @@ func setClipboard(copyToClipboardCmdLine []string, rawData []byte) error {
 	n, err := base64.StdEncoding.Decode(buffer, rawData)
 
 	if err != nil {
-		return err
+		return fmt.Errorf("on decoding '%s': %v", string(rawData), err)
 	}
 
 	data := buffer[:n]
